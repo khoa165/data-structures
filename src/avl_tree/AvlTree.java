@@ -23,6 +23,7 @@ public class AvlTree<K extends Comparable<K>, V> implements AvlTreeADT<K, V> {
    * 
    * @author Debra Deppeler.
    */
+  @SuppressWarnings("hiding")
   class Node<K, V> {
     K key; // Key of node.
     V value; // Value of node.
