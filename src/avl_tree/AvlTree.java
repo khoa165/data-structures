@@ -1,5 +1,6 @@
 package avl_tree;
 
+import exception.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,14 +105,14 @@ public class AvlTree<K extends Comparable<K>, V> implements AvlTreeADT<K, V> {
    * @param key A key to search for.
    * @return The key that is in the left child of the found key.
    * 
-   * @throws IllegalNullKeyException if key argument is null.
+   * @throws IllegalNullArgumentException if key argument is null.
    * @throws KeyNotFoundException    if key is not found in this BST.
    */
   @Override
   public K getKeyOfLeftChildOf(K key)
-      throws IllegalNullKeyException, KeyNotFoundException {
-    if (key == null) // Throw IllegalNullKeyException when null key.
-      throw new IllegalNullKeyException();
+      throws IllegalNullArgumentException, KeyNotFoundException {
+    if (key == null) // Throw IllegalNullArgumentException when null key.
+      throw new IllegalNullArgumentException();
     if (getNodeHelper(key, this.root) == null) // Key not found.
       throw new KeyNotFoundException(); // Throw KeyNotFoundException.
     else if (getNodeHelper(key, this.root).left == null)
@@ -128,14 +129,14 @@ public class AvlTree<K extends Comparable<K>, V> implements AvlTreeADT<K, V> {
    * @param key A key to search for.
    * @return The key that is in the right child of the found key.
    * 
-   * @throws IllegalNullKeyException if key is null.
+   * @throws IllegalNullArgumentException if key is null.
    * @throws KeyNotFoundException    if key is not found in this BST.
    */
   @Override
   public K getKeyOfRightChildOf(K key)
-      throws IllegalNullKeyException, KeyNotFoundException {
-    if (key == null) // Throw IllegalNullKeyException when null key.
-      throw new IllegalNullKeyException();
+      throws IllegalNullArgumentException, KeyNotFoundException {
+    if (key == null) // Throw IllegalNullArgumentException when null key.
+      throw new IllegalNullArgumentException();
     if (getNodeHelper(key, this.root) == null) // Key not found.
       throw new KeyNotFoundException(); // Throw KeyNotFoundException.
     else if (getNodeHelper(key, this.root).right == null)
@@ -334,7 +335,7 @@ public class AvlTree<K extends Comparable<K>, V> implements AvlTreeADT<K, V> {
 
   /**
    * Add the key-value pair to the data structure and increase the number of
-   * keys. If key is null, throw IllegalNullKeyException. If key is already in
+   * keys. If key is null, throw IllegalNullArgumentException. If key is already in
    * data structure, throw DuplicateKeyException. Do not increase the number of
    * keys in the structure, if key-value pair is not added.
    * 
@@ -343,9 +344,9 @@ public class AvlTree<K extends Comparable<K>, V> implements AvlTreeADT<K, V> {
    */
   @Override
   public void insert(K key, V value)
-      throws IllegalNullKeyException, DuplicateKeyException {
+      throws IllegalNullArgumentException, DuplicateKeyException {
     if (key == null)
-      throw new IllegalNullKeyException();
+      throw new IllegalNullArgumentException();
     if (contains(key))
       throw new DuplicateKeyException();
     Node<K, V> newNode = new Node<K, V>(key, value); // Construct a new node.
@@ -408,7 +409,7 @@ public class AvlTree<K extends Comparable<K>, V> implements AvlTreeADT<K, V> {
   /**
    * If key is found, remove the key-value pair from the data structure and
    * decrease number keys. If key is not found, do not decrease the number of
-   * keys in the data structure. If key is null, throw IllegalNullKeyException.
+   * keys in the data structure. If key is null, throw IllegalNullArgumentException.
    * If key is not found, throw KeyNotFoundException().
    * 
    * @param key A key to remove.
@@ -416,9 +417,9 @@ public class AvlTree<K extends Comparable<K>, V> implements AvlTreeADT<K, V> {
    */
   @Override
   public boolean remove(K key)
-      throws IllegalNullKeyException, KeyNotFoundException {
+      throws IllegalNullArgumentException, KeyNotFoundException {
     if (key == null)
-      throw new IllegalNullKeyException();
+      throw new IllegalNullArgumentException();
     if (!contains(key))
       throw new KeyNotFoundException();
 
@@ -507,15 +508,15 @@ public class AvlTree<K extends Comparable<K>, V> implements AvlTreeADT<K, V> {
    * Returns the value associated with the specified key.
    *
    * Does not remove key or decrease number of keys. If key is null, throw
-   * IllegalNullKeyException. If key is not found, throw KeyNotFoundException().
+   * IllegalNullArgumentException. If key is not found, throw KeyNotFoundException().
    * 
    * @param key A key to get the value associated with it.
    * @return the value associated with the give key if found.
    */
   @Override
-  public V get(K key) throws IllegalNullKeyException, KeyNotFoundException {
+  public V get(K key) throws IllegalNullArgumentException, KeyNotFoundException {
     if (key == null)
-      throw new IllegalNullKeyException();
+      throw new IllegalNullArgumentException();
     if (getNodeHelper(key, this.root) == null)
       throw new KeyNotFoundException();
     else // Call get node helper to retrieve the node with that key.
@@ -545,16 +546,16 @@ public class AvlTree<K extends Comparable<K>, V> implements AvlTreeADT<K, V> {
 
   /**
    * Returns true if the key is in the data structure. If key is null, throw
-   * IllegalNullKeyException. Returns false if key is not null and is not
+   * IllegalNullArgumentException. Returns false if key is not null and is not
    * present.
    * 
    * @param key A key to check if it exists in data structure.
    * @return true if key is found, false otherwise.
    */
   @Override
-  public boolean contains(K key) throws IllegalNullKeyException {
+  public boolean contains(K key) throws IllegalNullArgumentException {
     if (key == null)
-      throw new IllegalNullKeyException();
+      throw new IllegalNullArgumentException();
     if (getNodeHelper(key, this.root) == null) // Node not found.
       return false;
     else

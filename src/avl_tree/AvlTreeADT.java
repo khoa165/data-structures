@@ -1,5 +1,6 @@
 package avl_tree;
 
+import exception.*;
 import java.util.List;
 
 /**
@@ -26,11 +27,11 @@ public interface AvlTreeADT<K extends Comparable<K>, V> {
    * @param key A key to search for
    * @return The key that is in the left child of the found key
    * 
-   * @throws IllegalNullKeyException if key argument is null
-   * @throws KeyNotFoundException    if key is not found in this BST
+   * @throws IllegalNullArgumentException if key argument is null
+   * @throws KeyNotFoundException         if key is not found in this BST
    */
   K getKeyOfLeftChildOf(K key)
-      throws IllegalNullKeyException, KeyNotFoundException;
+      throws IllegalNullArgumentException, KeyNotFoundException;
 
   /**
    * Tries to find a node with a key that matches the specified key. If a
@@ -40,11 +41,11 @@ public interface AvlTreeADT<K extends Comparable<K>, V> {
    * @param key A key to search for
    * @return The key that is in the right child of the found key
    * 
-   * @throws IllegalNullKeyException if key is null
-   * @throws KeyNotFoundException    if key is not found in this BST
+   * @throws IllegalNullArgumentException if key is null
+   * @throws KeyNotFoundException         if key is not found in this BST
    */
   K getKeyOfRightChildOf(K key)
-      throws IllegalNullKeyException, KeyNotFoundException;
+      throws IllegalNullArgumentException, KeyNotFoundException;
 
 
   /**
@@ -109,36 +110,39 @@ public interface AvlTreeADT<K extends Comparable<K>, V> {
 
   /**
    * Add the key,value pair to the data structure and increase the number of
-   * keys. If key is null, throw IllegalNullKeyException; If key is already in
-   * data structure, throw DuplicateKeyException(); Do not increase the num of
-   * keys in the structure, if key,value pair is not added.
+   * keys. If key is null, throw IllegalNullArgumentException; If key is already
+   * in data structure, throw DuplicateKeyException(); Do not increase the num
+   * of keys in the structure, if key,value pair is not added.
    */
   void insert(K key, V value)
-      throws IllegalNullKeyException, DuplicateKeyException;
+      throws IllegalNullArgumentException, DuplicateKeyException;
 
 
 
   /**
    * If key is found, remove the key,value pair from the data structure and
    * decrease num keys. If key is not found, do not decrease the number of keys
-   * in the data structure. If key is null, throw IllegalNullKeyException If key
-   * is not found, throw KeyNotFoundException().
+   * in the data structure. If key is null, throw IllegalNullArgumentException
+   * If key is not found, throw KeyNotFoundException().
    */
-  boolean remove(K key) throws IllegalNullKeyException, KeyNotFoundException;
+  boolean remove(K key)
+      throws IllegalNullArgumentException, KeyNotFoundException;
 
   /**
    * Returns the value associated with the specified key
    *
    * Does not remove key or decrease number of keys If key is null, throw
-   * IllegalNullKeyException If key is not found, throw KeyNotFoundException().
+   * IllegalNullArgumentException If key is not found, throw
+   * KeyNotFoundException().
    */
-  V get(K key) throws IllegalNullKeyException, KeyNotFoundException;
+  V get(K key) throws IllegalNullArgumentException, KeyNotFoundException;
 
   /**
    * Returns true if the key is in the data structure If key is null, throw
-   * IllegalNullKeyException Returns false if key is not null and is not present
+   * IllegalNullArgumentException Returns false if key is not null and is not
+   * present
    */
-  boolean contains(K key) throws IllegalNullKeyException;
+  boolean contains(K key) throws IllegalNullArgumentException;
 
   /**
    * Returns the number of key,value pairs in the data structure
